@@ -15,7 +15,7 @@ var AudioPlayer = (function() {
   nextBtn,
   jumpBtn,
   plBtn,
-  repeatBtn,
+  downBtn,
   volumeBtn,
   progressBar,
   preloadBar,
@@ -86,7 +86,7 @@ var AudioPlayer = (function() {
     prevBtn        = player.querySelector('.ap__controls--prev');
     nextBtn        = player.querySelector('.ap__controls--next');
     jumpBtn        = player.querySelector('.ap__controls--jump');
-    repeatBtn      = player.querySelector('.ap__controls--repeat');
+    downBtn        = player.querySelector('.ap__controls--down');
     volumeBtn      = player.querySelector('.volume-btn');
     plBtn          = player.querySelector('.ap__controls--playlist');
     curTime        = player.querySelector('.track__time--current');
@@ -100,7 +100,7 @@ var AudioPlayer = (function() {
 
     playBtn.addEventListener('click', playToggle, false);
     volumeBtn.addEventListener('click', volumeToggle, false);
-    repeatBtn.addEventListener('click', repeatToggle, false);
+    downBtn.addEventListener('click', downloads, false);
 
     progressBar.closest('.progress-container').addEventListener('mousedown', handlerBar, false);
     progressBar.closest('.progress-container').addEventListener('mousemove', seek, false);
@@ -496,15 +496,9 @@ var AudioPlayer = (function() {
     }
   }
 
-  function repeatToggle() {
-    if(repeatBtn.classList.contains('is-active')) {
-      repeating = false;
-      repeatBtn.classList.remove('is-active');
-    }
-    else {
-      repeating = true;
-      repeatBtn.classList.add('is-active');
-    }
+  function downloads() {
+    var url = playList[index].audio_high;
+     $.fileDownload(url).done(function () { console.log('File download a success!'); });
   }
 
   function plToggle() {
@@ -662,7 +656,7 @@ var AudioPlayer = (function() {
 
     playBtn.removeEventListener('click', playToggle, false);
     volumeBtn.removeEventListener('click', volumeToggle, false);
-    repeatBtn.removeEventListener('click', repeatToggle, false);
+    downBtn.removeEventListener('click', downloads, false);
     plBtn.removeEventListener('click', plToggle, false);
 
     progressBar.closest('.progress-container').removeEventListener('mousedown', handlerBar, false);
@@ -694,7 +688,7 @@ var AudioPlayer = (function() {
     playSvgPath.setAttribute('d', playSvg.getAttribute('data-play'));
     volumeBtn.classList.remove('has-muted');
     plBtn.classList.remove('is-active');
-    repeatBtn.classList.remove('is-active');
+    downBtn.classList.remove('is-active');
 
     // Remove player from the DOM if necessary
     // player.parentNode.removeChild(player);
@@ -800,7 +794,7 @@ window.AP = AudioPlayer;
 
 //var https = 'http://jovemnerd.com.br/wp-json/jovemnerd/v1/nerdcasts';
 //var https = 'http://192.168.1.80/jovemnerd/api/';
-var https = 'hhttps://nerdplay.github.io/nerdcasts.json';
+var https = 'https://nerdplay.github.io/nerdcasts.json';
 var playerlists = function () {
         $.ajax({
             dataType: 'json',
