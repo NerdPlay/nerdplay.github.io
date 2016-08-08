@@ -800,7 +800,7 @@ window.AP = AudioPlayer;
 
 //var https = 'http://jovemnerd.com.br/wp-json/jovemnerd/v1/nerdcasts';
 //var https = 'http://192.168.1.80/jovemnerd/api/';
-var https = 'hhttps://nerdplay.github.io/nerdcasts.json';
+var https = 'https://nerdplay.github.io/nerdcasts.json';
 var playerlists = function () {
         $.ajax({
             dataType: 'json',
