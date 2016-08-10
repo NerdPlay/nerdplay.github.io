@@ -144,7 +144,7 @@ var AudioPlayer = (function() {
     }
     audio.src = playList[index].audio_high;
     trackTitle.innerHTML = playList[index].product_name + ' ' +  playList[index].episode + ' : ' + playList[index].title;
-    $('.options .fundo').attr('src', playList[index].image);
+    $('.options .capa').attr('src', playList[index].image);
     
     if(settings.autoPlay) {
       audio.play();
@@ -168,7 +168,9 @@ var AudioPlayer = (function() {
         '<img class="image" src="' + insert[i].image +'">' +
         '</div>');
       }
-      $('.options .fundo').attr('src', playList[index].image);
+      $('.options .capa').attr('src', playList[index].image);
+      $('.options .description').css('display', 'block');
+      $('.description a.link').attr('href', playList[index].url);
       notify(namec, {
         icon:icons,
         body: description
@@ -322,7 +324,9 @@ var AudioPlayer = (function() {
                   }
                   audio.src = playList[index].audio_high;
                   trackTitle.innerHTML = playList[index].product_name + ' ' +  playList[index].episode + ' : ' + playList[index].title;
-                  $('.options .fundo').attr('src', playList[index].image);
+                  $('.options .capa').attr('src', playList[index].image);
+                  $('.options .description').css('display', 'block');
+                  $('.description a.link').attr('href', playList[index].url);
                   progressBar.style.width = 0;
                 }
               }
@@ -385,7 +389,9 @@ var AudioPlayer = (function() {
         '<img class="image" src="' + insert[i].image +'">' +
         '</div>');
       }
-      $('.options .fundo').attr('src', playList[index].image);
+      $('.options .capa').attr('src', playList[index].image);
+      $('.options .description').css('display', 'block');
+      $('.description a.link').attr('href', playList[index].url);
       notify(namec, {
         icon:icons,
         body: description,
@@ -455,7 +461,9 @@ var AudioPlayer = (function() {
         '<img class="image" src="' + insert[i].image +'">' +
         '</div>');
       }
-      $('.options .fundo').attr('src', playList[index].image);
+      $('.options .capa').attr('src', playList[index].image);
+      $('.options .description').css('display', 'block');
+      $('.description a.link').attr('href', playList[index].url);
       notify(namec, {
         icon:icons,
         body: description
@@ -515,8 +523,8 @@ var AudioPlayer = (function() {
     var timers = audio.currentTime;
     var set = $.grep(Object.keys(playList[index].insertions), function (k) { return playList[index].insertions[k]['start-time'] == timers.toFixed(0); });
     var dset = $.grep(Object.keys(playList[index].insertions), function (k) { return playList[index].insertions[k]['end-time'] == timers.toFixed(0); });
-    $('.promos id-' + dset[0]).css('display', 'none');
-    $('.promos id-' + set[0]).css('display', 'block');
+    $('.promos .id-' + dset[0]).css('display', 'none');
+    $('.promos .id-' + set[0]).css('display', 'block');
 
     var
     curMins = Math.floor(audio.currentTime / 60),
@@ -800,6 +808,7 @@ var playerlists = function () {
             dataType: 'json',
             url: https,
                 success: function (data) {
+                //console.log(data);
                 AP.init({
                 playList: data
             });
