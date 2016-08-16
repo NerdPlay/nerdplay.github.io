@@ -27,17 +27,16 @@ function getParameterByName(name, url) {
     if (!results[2]) return '';
     return decodeURIComponent(results[2].replace(/\+/g, " "));
 }
-$(document).ready(function() {
-  var code = getParameterByName('number');
-  console.log(code);
-});
 (function(window, undefined) {
 
 'use strict';
 
 var AudioPlayer = (function() {
 
-  // Player vars!
+  var code = getParameterByName('number');
+  if(code==null){
+    code = 0;
+  }
   var
   docTitle = document.title,
   player   = document.getElementById('ap'),
@@ -56,7 +55,7 @@ var AudioPlayer = (function() {
   durTime,
   trackTitle,
   audio,
-  index = 0,
+  index = code,
   playList,
   volumeBar,
   wheelVolumeValue = 0,
